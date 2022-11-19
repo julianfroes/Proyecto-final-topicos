@@ -10,7 +10,7 @@ export class ClienteController{
         ){}
 
     @Post()
-    Create(@Body() params : ICliente): string | boolean{
+    Create(@Body() params : ICliente){
         this.clienteService.create(params);
         return true
     }
