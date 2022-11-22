@@ -8,9 +8,6 @@ export class Pago{
     id : number;
 
     @Column()
-    fecha : Date;
-
-    @Column()
     total : number;
 
     @Column()

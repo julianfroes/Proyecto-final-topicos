@@ -1,9 +1,8 @@
+import { Cliente } from './../../../models/Cliente';
+import { Cliente as ClienteEntity } from '../../../entities/cliente.entity';
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Cliente as ClienteEntity, Cliente } from '../../entities/cliente.entity';
-import { ICliente } from '../../models/Cliente';
-
 
 
 @Injectable()
@@ -14,11 +13,11 @@ export class ClienteService{
     ){}
     private readonly Clientes: Cliente[] = [];
 
-    async create( cliente : ICliente){
+    async create( cliente : Cliente){
         return await this.clienteEntity.insert(cliente);
     }
 
-    getAll(): ICliente[]{
+    getAll(): Cliente[]{
         return this.Clientes;
     }
 }

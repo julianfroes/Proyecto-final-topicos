@@ -1,5 +1,5 @@
 //TODO falta relacion de modelo de otras tablas
-export interface ICliente{
+export interface Cliente{
     id : number;
     nombre : string;
     correo : string;

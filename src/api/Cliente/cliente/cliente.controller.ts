@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { ClienteService } from "./cliente.service";
-import { ICliente } from '../../models/Cliente';
+import { Cliente } from 'src/models/Cliente';
 
 
 @Controller('cliente')
@@ -10,14 +10,14 @@ export class ClienteController{
         ){}
 
     @Post()
-    Create(@Body() params : ICliente): string | boolean{
+    Create(@Body() params : Cliente): string | boolean{
         this.clienteService.create(params);
         return true
     }
 
     //Obtener todos los clientes y consumo
     @Get('/all')
-    getClientes(): ICliente[]{
+    getClientes(): Cliente[]{
         return this.clienteService.getAll();
     }
 
