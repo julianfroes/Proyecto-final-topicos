@@ -22,6 +22,7 @@ export class PagoService {
         });
     }
     */
+   /*
     async agregar_pago(data : any){
 
         const consumo = await this.consumoRepo.findOne(data.id_consumo);
@@ -35,4 +36,5 @@ export class PagoService {
         return this.pagoRepo.save(newPago);
 
         };
-    }
+    }*/
+}

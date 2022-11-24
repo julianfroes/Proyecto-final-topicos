@@ -4,8 +4,8 @@ import { PagoService } from './pago.service';
 @Controller('Pago')
 export class DetailsController {
     constructor(private pagoService: PagoService){}
-    @Post()
+    /*@Post()
     agregar_pago(@Body() body: any){
         return this.pagoService.agregar_pago(body);
-    }
+    }*/
 }

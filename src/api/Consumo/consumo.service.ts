@@ -12,6 +12,7 @@ export class ConsumoService {
         private pagoService : PagoService ){
     }
     //tampoco estoy muy seguro de este metodo
+    /*
     async create( consumo : IConsumo ){
         const date = new Date();
         let totalConsumo = 0;
@@ -26,6 +27,6 @@ export class ConsumoService {
         })
         //registro del detalle
         await this.pagoService.agregar_pago(consumo.pago )
-    }
+    }*/
 
 }

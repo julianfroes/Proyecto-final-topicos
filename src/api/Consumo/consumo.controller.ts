@@ -7,12 +7,12 @@ export class ConsumoController {
     constructor( private consumoService : ConsumoService ){
     }
 
-    @Post()
+/*    @Post()
     Create(@Body() params : IConsumo ){
         try {
             return this.consumoService.create(params)
         } catch (error) {
             console.log(error)
         }
-    }
+    }*/
 }
