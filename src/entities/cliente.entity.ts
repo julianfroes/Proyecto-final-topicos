@@ -21,8 +21,7 @@ export class Cliente{
     @Column()
     fecha_nacimiento : Date;
 
-    @OneToMany(()=> Consumo, (consumo) => consumo.cliente)
-    
+    @OneToMany(()=> Consumo, (consumo) => consumo.cliente) 
     consumo: Consumo[];
 
 }
