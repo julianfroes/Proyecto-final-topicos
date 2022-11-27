@@ -12,7 +12,7 @@ import { PagoService } from './../Pago/pago.service';
 
 
 @Module({
-imports: [TypeOrmModule.forFeature([Pago,Consumo])],
+    imports: [TypeOrmModule.forFeature([Pago,Consumo])],
     providers: [PagoService,ConsumoService], //servicio para las consultas a la BD
     controllers: [PagoController,ConsumoController],
     exports: [TypeOrmModule]
