@@ -22,6 +22,7 @@ export class PagoService {
         });
     }
     */
+   /*
     async agregar_pago(data : any){
 
         const consumo = await this.consumoRepo.findOne(data.id_consumo);
@@ -29,10 +30,31 @@ export class PagoService {
             throw new NotFoundException('no se encontro el consumo');
         }
         const newPago = new Pago();
-        newPago.id_consumo = consumo.id;//esto no se si este bien
+        newPago.consumo = consumo;
         newPago.pagado = data.pagado;
         newPago.total = data.total;
         return this.pagoRepo.save(newPago);
 
-        };
     }
+    */
+    async agregar_pago(data : any){
+        const direccionidconsumo = data.idconsumo;
+        const consumo = await this.consumoRepo.findOne({
+            where:{
+                id:direccionidconsumo
+            },
+        });
+        if(!consumo){
+            throw new NotFoundException('no se encontro el consumo');
+        }
+        const newPago = new Pago();
+        newPago.consumo = consumo;
+        newPago.pagado = data.pagado;
+        newPago.total = data.total;
+        return this.pagoRepo.save(newPago);
+
+    }
+
+    
+}
+

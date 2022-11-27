@@ -22,9 +22,9 @@ export class ClienteController{
     }
 
     //TODO Pendiente obtener los clientes con mayor consumo
-    @Get('')
-    getCliente(){
-
+    @Get('/nuevo')
+    getCliente(): any{
+        return this.clienteService.findAll();
     }
 
 }

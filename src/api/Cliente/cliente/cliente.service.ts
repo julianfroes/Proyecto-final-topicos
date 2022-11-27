@@ -20,5 +20,8 @@ export class ClienteService{
     getAll(): Cliente[]{
         return this.Clientes;
     }
+    findAll() {
+        return this.clienteEntity.find({relations:['consumo']});
+    }
 }
 
