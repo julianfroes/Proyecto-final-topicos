@@ -7,11 +7,12 @@ import { Repository } from 'typeorm';
 export class PagoService {
     constructor( @InjectRepository(Pago) private pagoRepo : Repository< Pago >,){}
 
-    async create(id_consumo: number, total: number){
+    async create(idConsumo: number, tot: number){
         // const direccionidconsumo = data.id_consumo;
-        const consumo = await this.pagoRepo.insert({
-            id_consumo: id_consumo,
-            total: total,
+        const consumo = await this.pagoRepo.save({
+            id:null,
+            id_consumo: idConsumo,
+            total: tot,
             pagado: false
         });
 

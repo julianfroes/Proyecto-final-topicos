@@ -33,12 +33,17 @@ export class ConsumoService {
             total = nuevoTotal;
         }
 
+        // consumo.id_cliente
+
         const newConsumo = await this.consumoRepo.save({
             fecha: date,
             consumo: kw,
             id_cliente: consumo.id_cliente
             
-        }).then((res) => {this.pagoService.create(res.consumo, total)})
+        }).then((res) => {
+            this.pagoService.create(res.id, total).then((res) => console.log(res)).catch((error) => console.log(error))
+        }).catch((error) => console.log(error)
+        )
     }
 
     //Obtener registro de consumo y su respectivo pago
