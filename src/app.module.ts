@@ -9,7 +9,8 @@ import { PagoModule } from './api/Pago/pago.module';
 
 
 @Module({
-  imports: [Connection,ClienteModule,ConsumoModule,/*PagoModule    Por alguna razon este modulo da error y no se puede mapear*/],
+  //TODO falta configurar para docker
+  imports: [Connection, ClienteModule, ConsumoModule, PagoModule],
   controllers: [AppController],
   providers: [AppService],
 })
