@@ -1,8 +1,10 @@
-//TODO falta relacion de modelo de otras tablas
-export interface Cliente{
+import { IConsumo } from "./Consumo";
+export interface ICliente{
     id : number;
     nombre : string;
     correo : string;
     telefono : string;
     domicilio : string;
+    // fecha_nacimiento : Date;
+    // consumo: IConsumo[];
 }

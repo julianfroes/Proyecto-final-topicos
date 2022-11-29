@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { ClienteService } from "./cliente.service";
-import { Cliente } from 'src/models/Cliente';
+import { ICliente } from 'src/models/Cliente';
 
 
 @Controller('cliente')
@@ -10,21 +10,28 @@ export class ClienteController{
         ){}
 
     @Post()
-    Create(@Body() params : Cliente): string | boolean{
-        this.clienteService.create(params);
-        return true
+    Create(@Body() params : ICliente){
+        try {
+            this.clienteService.create(params);
+        } catch (error) {
+            console.log(`Error: ${error}`);
+        }
     }
 
     //Obtener todos los clientes y consumo
-    @Get('/all')
-    getClientes(): Cliente[]{
-        return this.clienteService.getAll();
+    @Get()
+    getAll(){
+        try {
+            this.clienteService.getAll();
+        } catch (error) {
+            console.log(`Error: ${error}`);
+        }
     }
 
     //TODO Pendiente obtener los clientes con mayor consumo
-    @Get('')
-    getCliente(){
-
-    }
+    // @Get('/nuevo')
+    // getCliente(): any{
+    //     return this.clienteService.findAll();
+    // }
 
 }

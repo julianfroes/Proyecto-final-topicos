@@ -1,10 +1,9 @@
+import { IPago } from "./Pago"
+
 export interface IConsumo{
     id : number
     fecha : Date
-    pago : IPago[]
-}
-
-export interface IPago{
-    total : number
-    pagado : boolean
+    consumo : number
+    id_cliente : number
+    //TODO relacion debe ir aqui? pago : IPago[] 
 }
