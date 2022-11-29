@@ -27,10 +27,15 @@ export class ConsumoController {
     @Get()
     getReporteConsumo(){
         try {
-            this.consumoService.getAll();
+            return this.consumoService.getAll();
         } catch (error) {
             console.log(`Error: ${error}`);
         }
+    }
+
+    @Get('/reportesconsumoGet')
+    getConsumos(){
+        return this.consumoService.reporteTodoslosConsumos();
     }
 
     /*@Post()
