@@ -19,7 +19,7 @@ export class ConsumoService {
         const date = new Date();
         let total = 0;
         const kw = consumo.consumo;
-        if (kw > 0 && kw >= 100) {
+        if (kw > 0 && kw <= 100) {
             total = kw * 150;
         } else if (kw > 100 && kw <= 170) {
             total = kw * 300;
