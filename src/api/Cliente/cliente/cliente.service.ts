@@ -17,12 +17,17 @@ export class ClienteService{
         return await this.clienteEntity.insert(cliente);
     }
     //ya sirve pero solo devuelve los clientes
-    getAll(): Promise<ClienteEntity[]>{
-        return this.clienteEntity.find();
-    }
+    // getAll(): Promise<ClienteEntity[]>{
+    //      return 
+    // }
     //NO TOCAR reporte clientes con sus consumos
     findAll(){
         return this.clienteEntity.find({relations:['consumo']});
+    }
+
+    getYaPagaron(){
+        const ultimoCliente = this.clienteEntity.find()
+
     }
 
     

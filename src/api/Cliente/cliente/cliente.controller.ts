@@ -35,10 +35,16 @@ export class ClienteController{
     }
     @Get('/clientesPagopagado')
     getClientesPagoS(){
-        //return this.clienteService.funcionYaPagaron();
+        try {
+            return this.clienteService.getYaPagaron();
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
     @Get('/clientesPagopendiente')
     getClientesPagoD(){
+        return this.clienteService.findAll()
         //return this.clienteService.funcionNohanPagado();
     }
 
