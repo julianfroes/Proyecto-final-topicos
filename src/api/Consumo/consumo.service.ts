@@ -6,12 +6,14 @@ import { Repository } from 'typeorm';
 import { Consumo } from 'src/entities/consumo.entity';
 import{ Cliente } from 'src/entities/cliente.entity';
 import { PagoService } from '../Pago/pago.service';
+import { Pago } from '../../entities/pago.entity';
 
 @Injectable()
 export class ConsumoService {
     constructor(
         @InjectRepository(Consumo) private consumoEntity: Repository<Consumo>,
         @InjectRepository(Cliente) private clienteEntity : Repository< Cliente >,
+        @InjectRepository(Pago) private pagoEntity : Repository< Pago >,
         private pagoService: PagoService,
     ) {
         
@@ -68,6 +70,22 @@ export class ConsumoService {
 
         }
         
+    }
+
+    async pagarConsumo(consumo: IConsumo){
+        const pagoPendiente = await this.pagoEntity.findOne({
+            where:{ id: consumo.id },
+        });
+
+        if(pagoPendiente){
+            const newPago = await this.pagoEntity.save({
+                id: pagoPendiente.id,
+                id_consumo: pagoPendiente.id_consumo,
+                total: pagoPendiente.total,
+                pagado: true
+                
+            })
+        }
     }
 
     //Obtener registro de consumo y su respectivo pago

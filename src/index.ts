@@ -1,11 +1,11 @@
-import express from "express"
+// import express from "express"
 
-const app = express()
+// const app = express()
 
-app.get("/", (req: Request, res: Response) => {
-    return res.json({
-        status: "Exito",
-    });
-});
+// app.get("/", (req: Request, res: Response) => {
+//     return res.json({
+//         status: "Exito",
+//     });
+// });
 
-app.listen(4000, () => console.log("Puerto 4000"));
+// app.listen(4000, () => console.log("Puerto 4000"));

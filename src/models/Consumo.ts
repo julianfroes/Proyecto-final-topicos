@@ -1,4 +1,3 @@
-import { IPago } from "./Pago"
 
 export interface IConsumo{
     id : number

@@ -18,11 +18,15 @@ export class ConsumoController {
         }
     }
 
-    //TODO Es necesario?
-    // @Post('/consumocliente')
-    // agregar_consumo(@Body() params: IConsumo){
-    //     return this.consumoService.agregar_consumo(params);
-    // }
+    @Post('/pagar')
+    pagarConsumo(@Body() params: IConsumo){
+        try {
+            this.consumoService.pagarConsumo(params);
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
 
     @Get()
     getReporteConsumo(){
@@ -38,13 +42,6 @@ export class ConsumoController {
         return this.consumoService.reporteTodoslosConsumos();
     }
 
-    /*@Post()
-    Create(@Body() params : IConsumo ){
-        try {
-            return this.consumoService.create(params)
-        } catch (error) {
-            console.log(error)
-        }
-    }*/
+    
     
 }
