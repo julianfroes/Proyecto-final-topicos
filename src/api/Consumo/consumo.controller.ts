@@ -18,7 +18,7 @@ export class ConsumoController {
         }
     }
 
-    @Post('/pagar')
+    /*@Post('/pagar')
     pagarConsumo(@Body() params: IConsumo){
         try {
             this.consumoService.pagarConsumo(params);
@@ -26,7 +26,7 @@ export class ConsumoController {
             console.log(error);
             
         }
-    }
+    }*/
 
     @Get()
     getReporteConsumo(){

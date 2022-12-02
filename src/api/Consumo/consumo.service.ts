@@ -34,21 +34,10 @@ export class ConsumoService {
             if(consumo.consumo>0){//aqui se verifica que el consumo se valido mayor a 0
                 const fechaNaCliente = cliente.fecha_nacimiento;//aca es de donde se saca la fecha de nacimiento del cliente
                 const date = new Date();
-                let total = 0;
                 const kw = consumo.consumo;
-                if (kw > 0 && kw <= 100) {
-                    total = kw * 150;
-                } else if (kw >= 101 && kw <= 300) {
-                    total = kw * 170;
-                } else if(kw > 300){
-                    total = kw * 190;
-                }
-
                 let edad = this.calcularEdad(fechaNaCliente);
-                if (edad > 50) {
-                    let nuevoTotal = total - (total * 0.1);
-                    total = nuevoTotal;
-                }
+                let total = this.calcularTotalPgar(kw,edad);
+
                 const newConsumo = await this.consumoEntity.save({
                     fecha: date,
                     consumo: kw,
@@ -71,22 +60,41 @@ export class ConsumoService {
         }
         
     }
-
+    /*Antigua funcion de pafar pago desde consumo
     async pagarConsumo(consumo: IConsumo){
         const pagoPendiente = await this.pagoEntity.findOne({
             where:{ id: consumo.id },
         });
 
         if(pagoPendiente){
-            const newPago = await this.pagoEntity.save({
-                id: pagoPendiente.id,
-                id_consumo: pagoPendiente.id_consumo,
-                total: pagoPendiente.total,
-                pagado: true
-                
-            })
+            const cliente = await this.clienteEntity.findOne({
+                where:{ id:consumo.id_cliente },
+            });
+            let totalpendiente = this.calcularTotalPgar(consumo.consumo,this.calcularEdad(cliente.fecha_nacimiento));
+            if(totalpendiente=pagoPendiente.total){//si se pasa o es igual lo pone en 0
+                await this.pagoEntity.save({
+                    id: pagoPendiente.id,
+                    id_consumo: pagoPendiente.id_consumo,
+                    total: 0,
+                    pagado: true
+                    
+                })
+            }
+            else{
+                await this.pagoEntity.save({//si no es mayor pero positivo cuenta como un abono
+                    id: pagoPendiente.id,
+                    id_consumo: pagoPendiente.id_consumo,
+                    total: totalpendiente-pagoPendiente.total,
+                    pagado: false
+                    
+                })
+            }
+            
         }
-    }
+        else{
+            //mensaje error
+        }
+    }*/
 
     //Obtener registro de consumo y su respectivo pago
     getAll(){
@@ -108,6 +116,21 @@ export class ConsumoService {
             edad--;
         }
         return edad;
+    }
+    calcularTotalPgar = (kw,edad) =>{
+        let total = 0;
+        if (kw > 0 && kw <= 100) {
+            total = kw * 150;
+        } else if (kw >= 101 && kw <= 300) {
+            total = kw * 170;
+        } else if(kw > 300){
+            total = kw * 190;
+        }
+        if (edad > 50) {
+            let nuevoTotal = total - (total * 0.1);
+            total = nuevoTotal;
+        }
+        return total;
     }
 
     //Reporte de todos los consumos

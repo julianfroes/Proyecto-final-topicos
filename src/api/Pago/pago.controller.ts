@@ -11,7 +11,8 @@ export class PagoController {
         private consumoService: ConsumoService){}
     @Post()
     Create(@Body() params: IPago){
-        // return this.pagoService.create(params);
+         return this.pagoService.pagarPago(params.id,params.total);
     }
+
 
 }
