@@ -13,15 +13,11 @@ export class ClienteService{
         @InjectRepository(ClienteEntity) private clienteEntity : Repository<ClienteEntity>,
         @InjectRepository(Consumo) private consumoEntity : Repository<Consumo>
     ){}
-    private readonly Clientes: ICliente[] = [];
 
     async create( cliente : ICliente){
         return await this.clienteEntity.insert(cliente);
     }
-    //ya sirve pero solo devuelve los clientes
-    // getAll(): Promise<ClienteEntity[]>{
-    //      return 
-    // }
+
     //NO TOCAR reporte clientes con sus consumos
     findAll(){
         return this.clienteEntity.find({relations:['consumo']});
@@ -39,10 +35,6 @@ export class ClienteService{
             if(mayorConsumo < Consumo.consumo){mayorConsumo = Consumo.consumo}
             if(menorConsumo > Consumo.consumo){menorConsumo = Consumo.consumo}
         });
-        console.log("mayor consumo es",mayorConsumo);
-        console.log("menor consumo es",menorConsumo);
-        
-        
         
         const clientequemasconsumio = await this.clienteEntity.findOne({
             select:{
@@ -87,7 +79,6 @@ export class ClienteService{
             }
         })
         return clientesEncontrados;
-
     }
 
     async getPagoPendiente(){
