@@ -103,10 +103,6 @@ export class ConsumoService {
         })
     }
 
-
-    //TODO Falta obtener quien consumio mas y menos kw
-
-
     calcularEdad = (fecha) => {
         const date = new Date();
         let birthday = new Date(fecha);

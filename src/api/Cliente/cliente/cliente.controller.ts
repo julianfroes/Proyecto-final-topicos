@@ -18,16 +18,6 @@ export class ClienteController{
         }
     }
 
-    //Obtener todos los clientes y consumo
-    //este no funciona
-    // @Get()
-    // getAll(){
-    //     try {
-    //          return this.clienteService.getAll();
-    //     } catch (error) {
-    //         console.log(`Error: ${error}`);
-    //     }
-    // }
     //este funciona
     @Get('/nuevoGet')
     getCliente(){
@@ -51,16 +41,15 @@ export class ClienteController{
             
         }
     }
-    @Get('/clientesPagopendiente')
+    @Get('/clientesPagoPendiente')
     getClientesPagoD(){
-        return this.clienteService.findAll()
-        //return this.clienteService.funcionNohanPagado();
+        try {
+            return this.clienteService.getPagoPendiente();
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
 
-    //TODO Pendiente obtener los clientes con mayor consumo
-    // @Get('/nuevo')
-    // getCliente(): any{
-    //     return this.clienteService.findAll();
-    // }
 
 }

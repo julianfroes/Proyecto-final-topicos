@@ -90,6 +90,19 @@ export class ClienteService{
 
     }
 
+    async getPagoPendiente(){
+        let clientesEncontrados = await this.clienteEntity.find({
+            where:{
+                consumo:{
+                    pago:{
+                        pagado: false
+                    }
+                }
+            }
+        })
+        return clientesEncontrados;
+    }
+
 }
 
     
