@@ -33,6 +33,15 @@ export class ClienteController{
     getCliente(){
         return this.clienteService.findAll();
     }
+    @Get('/mayormenor')
+    getReportemayormenor(){
+        try {
+            return this.clienteService.getMenoryMenorConsumo();
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
     @Get('/clientesPagopagado')
     getClientesPagoS(){
         try {

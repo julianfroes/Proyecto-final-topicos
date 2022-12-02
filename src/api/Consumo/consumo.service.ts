@@ -103,6 +103,7 @@ export class ConsumoService {
         })
     }
 
+
     //TODO Falta obtener quien consumio mas y menos kw
 
 
