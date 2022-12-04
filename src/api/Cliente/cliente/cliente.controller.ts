@@ -19,27 +19,13 @@ export class ClienteController{
     }
 
     //Obtener todos los clientes y consumo
-    //este no funciona
     @Get()
     getAll(){
         try {
-             return this.clienteService.getAll();
+            this.clienteService.getAll();
         } catch (error) {
             console.log(`Error: ${error}`);
         }
-    }
-    //este funciona
-    @Get('/nuevoGet')
-    getCliente(){
-        return this.clienteService.findAll();
-    }
-    @Get('/clientesPagopagado')
-    getClientesPagoS(){
-        //return this.clienteService.funcionYaPagaron();
-    }
-    @Get('/clientesPagopendiente')
-    getClientesPagoD(){
-        //return this.clienteService.funcionNohanPagado();
     }
 
     //TODO Pendiente obtener los clientes con mayor consumo
