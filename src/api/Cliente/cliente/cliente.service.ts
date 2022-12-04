@@ -18,12 +18,6 @@ export class ClienteService{
         return await this.clienteEntity.insert(cliente);
     }
 
-<<<<<<< HEAD
-    getAll(): Promise<ClienteEntity[]>{
-        return this.clienteEntity.find();
-    }
-    
-=======
     //NO TOCAR reporte clientes con sus consumos
     findAll(){
         return this.clienteEntity.find({relations:['consumo']});
@@ -100,7 +94,6 @@ export class ClienteService{
         return clientesEncontrados;
     }
 
->>>>>>> ActualizarPago
 }
 
     

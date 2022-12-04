@@ -27,22 +27,11 @@ export class ConsumoController {
         }
     }
 
-<<<<<<< HEAD
-    /*@Post()
-    Create(@Body() params : IConsumo ){
-        try {
-            return this.consumoService.create(params)
-        } catch (error) {
-            console.log(error)
-        }
-    }*/
-=======
     @Get('/reportesconsumoGet')
     getConsumos(){
         return this.consumoService.reporteTodoslosConsumos();
     }
 
     
->>>>>>> ActualizarPago
     
 }

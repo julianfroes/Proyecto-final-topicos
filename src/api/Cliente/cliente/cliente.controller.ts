@@ -18,15 +18,6 @@ export class ClienteController{
         }
     }
 
-<<<<<<< HEAD
-    //Obtener todos los clientes y consumo
-    @Get()
-    getAll(){
-        try {
-            this.clienteService.getAll();
-        } catch (error) {
-            console.log(`Error: ${error}`);
-=======
     //este funciona
     @Get('/nuevoGet')
     getCliente(){
@@ -57,7 +48,6 @@ export class ClienteController{
         } catch (error) {
             console.log(error);
             
->>>>>>> ActualizarPago
         }
     }
 

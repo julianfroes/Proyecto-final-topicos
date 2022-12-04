@@ -1,73 +1,23 @@
 //import { PagoService } from './../pago/pago.service';
 import { IConsumo } from './../../models/Consumo';
-<<<<<<< HEAD
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Consumo } from 'src/entities/consumo.entity';
-=======
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Consumo } from 'src/entities/consumo.entity';
 import { Cliente } from 'src/entities/cliente.entity';
->>>>>>> ActualizarPago
 import { PagoService } from '../Pago/pago.service';
 import { Pago } from '../../entities/pago.entity';
 
 @Injectable()
 export class ConsumoService {
     constructor(
-<<<<<<< HEAD
-        @InjectRepository(Consumo) private consumoRepo: Repository<Consumo>,
-        private pagoService: PagoService
-=======
         @InjectRepository(Consumo) private consumoEntity: Repository<Consumo>,
         @InjectRepository(Cliente) private clienteEntity: Repository<Cliente>,
         @InjectRepository(Pago) private pagoEntity: Repository<Pago>,
         private pagoService: PagoService,
->>>>>>> ActualizarPago
     ) {
 
     }
-<<<<<<< HEAD
-    async create(consumo: IConsumo) {
-        //Se crea consumo y se calculan precios por rangos
-        const date = new Date();
-        let total = 0;
-        const kw = consumo.consumo;
-        if (kw > 0 && kw >= 100) {
-            total = kw * 150;
-        } else if (kw > 100 && kw <= 170) {
-            total = kw * 300;
-        } else {
-            total = kw * 190;
-        }
-
-        let edad = this.calcularEdad(consumo.fecha);
-        if (edad > 50) {
-            let nuevoTotal = total - (total * 0.1);
-            total = nuevoTotal;
-        }
-
-        // consumo.id_cliente
-
-        const newConsumo = await this.consumoRepo.save({
-            fecha: date,
-            consumo: kw,
-            id_cliente: consumo.id_cliente
-            
-        }).then((res) => {
-            this.pagoService.create(res.id, total).then((res) => console.log(res)).catch((error) => console.log(error))
-        }).catch((error) => console.log(error)
-        )
-    }
-
-    //Obtener registro de consumo y su respectivo pago
-    getAll(){
-        return this.consumoRepo.find({
-            relations:['id_cliente', 'pago.id_consumo']
-=======
     //Se crea consumo y se calculan precios por rangos
     async create(consumo: IConsumo): Promise<boolean> {
         //primero se busca el cliente con el id que se manda en el request
@@ -117,7 +67,6 @@ export class ConsumoService {
     getAll() {
         return this.consumoEntity.find({
             relations: ['id_cliente', 'pago.id_consumo']
->>>>>>> ActualizarPago
         })
     }
 
@@ -148,12 +97,9 @@ export class ConsumoService {
         return total;
     }
 
-<<<<<<< HEAD
-=======
     //Reporte de todos los consumos
     reporteTodoslosConsumos() {
         return this.consumoEntity.find({ relations: ['pago'] });
     }
 
->>>>>>> ActualizarPago
 }
