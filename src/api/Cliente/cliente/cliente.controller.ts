@@ -18,6 +18,7 @@ export class ClienteController{
         }
     }
 
+<<<<<<< HEAD
     //Obtener todos los clientes y consumo
     @Get()
     getAll(){
@@ -25,13 +26,40 @@ export class ClienteController{
             this.clienteService.getAll();
         } catch (error) {
             console.log(`Error: ${error}`);
+=======
+    //este funciona
+    @Get('/nuevoGet')
+    getCliente(){
+        return this.clienteService.findAll();
+    }
+    @Get('/mayormenor')
+    getReportemayormenor(){
+        try {
+            return this.clienteService.getMenoryMenorConsumo();
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+    @Get('/clientesPagopagado')
+    getClientesPagoS(){
+        try {
+            return this.clienteService.getYaPagaron();
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+    @Get('/clientesPagoPendiente')
+    getClientesPagoD(){
+        try {
+            return this.clienteService.getPagoPendiente();
+        } catch (error) {
+            console.log(error);
+            
+>>>>>>> ActualizarPago
         }
     }
 
-    //TODO Pendiente obtener los clientes con mayor consumo
-    // @Get('/nuevo')
-    // getCliente(): any{
-    //     return this.clienteService.findAll();
-    // }
 
 }

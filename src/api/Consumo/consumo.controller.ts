@@ -18,12 +18,6 @@ export class ConsumoController {
         }
     }
 
-    //TODO Es necesario?
-    // @Post('/consumocliente')
-    // agregar_consumo(@Body() params: IConsumo){
-    //     return this.consumoService.agregar_consumo(params);
-    // }
-
     @Get()
     getReporteConsumo(){
         try {
@@ -33,6 +27,7 @@ export class ConsumoController {
         }
     }
 
+<<<<<<< HEAD
     /*@Post()
     Create(@Body() params : IConsumo ){
         try {
@@ -41,5 +36,13 @@ export class ConsumoController {
             console.log(error)
         }
     }*/
+=======
+    @Get('/reportesconsumoGet')
+    getConsumos(){
+        return this.consumoService.reporteTodoslosConsumos();
+    }
+
+    
+>>>>>>> ActualizarPago
     
 }
