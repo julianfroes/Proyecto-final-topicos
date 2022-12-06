@@ -27,8 +27,8 @@ export class ConsumoService {
         });
         if (!cliente) {
             //aqui entra cuando no encuentra falta algun tipo de mensaje
-            console.log("Id de cliente no encontrada o no valida");
-            return false;
+            throw new BadRequestException({ cause: new Error(), description: "Id de cliente no encontrada o no valida" })
+            throw new Error("Id de cliente no encontrada o no valida");
         }
         else {
             if (consumo.consumo > 0) {//aqui se verifica que el consumo se valido mayor a 0

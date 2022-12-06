@@ -18,7 +18,7 @@ export class Cliente{
     @Column()
     domicilio : string;
 
-    @Column()
+    @Column({type: 'date', default: null})
     fecha_nacimiento : Date;
 
     @OneToMany(()=> Consumo, (consumo) => consumo.id_cliente) 

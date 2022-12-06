@@ -1,7 +1,7 @@
 import { ICliente } from './../../../models/Cliente';
 import { IConsumo } from 'src/models/Consumo';
 import { Cliente as ClienteEntity } from '../../../entities/cliente.entity';
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { MoreThan, Repository } from "typeorm";
 import { Consumo } from 'src/entities/consumo.entity';
@@ -15,7 +15,18 @@ export class ClienteService{
     ){}
 
     async create( cliente : ICliente){
-        return await this.clienteEntity.insert(cliente);
+        try {
+            if(cliente.nombre&&cliente.correo&&cliente.domicilio&&cliente.telefono&&cliente.fecha_nacimiento){
+                return await this.clienteEntity.insert(cliente);
+            }else{
+                // throw new BadRequestException({ cause: new Error(), description: "Faltan datos de cliente por ingresar" })
+                throw new Error("Faltan datos de cliente por ingresar");
+            }
+        } catch (error) {
+            // throw new BadRequestException({ cause: new Error(), description: "Faltan datos de cliente por ingresar" })
+            throw new Error("Faltan datos de cliente por ingresar " + error);
+        }
+        
     }
 
     //NO TOCAR reporte clientes con sus consumos
