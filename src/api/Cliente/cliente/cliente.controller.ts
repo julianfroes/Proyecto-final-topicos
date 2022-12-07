@@ -11,8 +11,26 @@ export class ClienteController{
 
     @Post()
     Create(@Body() params : ICliente){
+        //Validacion????
         try {
-            this.clienteService.create(params);
+            if ((params.correo||params.domicilio||params.fecha_nacimiento||params.nombre||params.telefono) !== null) {
+                if (typeof(params.nombre) != 'string') {
+                    return 'Nombre no valido';
+                }
+                if (typeof(params.correo) != 'string') {
+                    return 'Correo no valido';
+                }
+                if (typeof(params.domicilio) != 'string') {
+                    return 'Domicilio no valido';
+                }
+                if (typeof(params.fecha_nacimiento) != 'string') {
+                    return 'Fecha no valida';
+                }
+                if (typeof(params.telefono) != 'string') {
+                    return 'Telefono no valido';
+                }
+                this.clienteService.create(params);
+            }            
         } catch (error) {
             console.log(`Error: ${error}`);
         }
