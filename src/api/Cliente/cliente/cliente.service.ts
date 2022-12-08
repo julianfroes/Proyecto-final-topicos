@@ -100,6 +100,20 @@ export class ClienteService{
         return clientesEncontrados;
     }
 
+    async getById(id : number){
+       let clienteEncontrado = await this.clienteEntity.find({
+        where:{
+            id: id
+        }
+
+       })
+       if (clienteEncontrado) {
+        return clienteEncontrado;
+       }else{
+        return 'Id de usuario no existe';
+       }
+    }
+
 }
 
     
