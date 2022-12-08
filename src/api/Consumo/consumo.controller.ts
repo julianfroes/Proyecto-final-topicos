@@ -11,6 +11,15 @@ export class ConsumoController {
     @Post()
     Create(@Body() params : IConsumo){
         try {
+
+            if (typeof(params.consumo) != 'number') {
+                return 'Consumo no valido';
+            }
+            if (typeof(params.id_cliente) != 'number') {
+                return 'id no valido';
+            }
+
+
             this.consumoService.create(params);
         } catch (error) {
             console.log(`Error: ${error}`);

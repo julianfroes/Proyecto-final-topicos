@@ -11,7 +11,6 @@ export class ClienteController{
 
     @Post()
     Create(@Body() params : ICliente){
-        //Validacion????
         try {
             if ((params.correo||params.domicilio||params.fecha_nacimiento||params.nombre||params.telefono) !== null) {
                 if (typeof(params.nombre) != 'string') {

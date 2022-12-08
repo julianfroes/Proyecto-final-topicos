@@ -11,6 +11,12 @@ export class PagoController {
         private consumoService: ConsumoService){}
     @Post()
     Create(@Body() params: IPago){
+        if (typeof(params.id) != 'number') {
+            return 'Id no valido';
+        }
+        if (typeof(params.total) != 'number') {
+            return 'Cantidad ingresada no valida';
+        }
          return this.pagoService.pagarPago(params.id,params.total);
     }
 
