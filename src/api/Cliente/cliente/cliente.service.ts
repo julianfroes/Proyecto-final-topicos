@@ -1,7 +1,7 @@
 import { ICliente } from './../../../models/Cliente';
 import { IConsumo } from 'src/models/Consumo';
 import { Cliente as ClienteEntity } from '../../../entities/cliente.entity';
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { MoreThan, Repository } from "typeorm";
 import { Consumo } from 'src/entities/consumo.entity';
