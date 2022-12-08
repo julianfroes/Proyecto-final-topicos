@@ -15,14 +15,6 @@ export class ClienteService{
     ){}
 
     async create( cliente : ICliente){
-
-            const nombreExp = new RegExp(/^[a-zA-ZÀ-ÿ\s]{4,40}$/);
-            const correoExp = new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
-            const domicilioExp= new RegExp(/[a-zA-ZÀ-ÖØ-öø-ÿ\s]{5,50}$/);
-            const telefonoExp = new RegExp(/^[0-9]{10,}$/);
-            const fechaExp = new RegExp(/([0-9]{4,})([-])([0-9]{2,})([-])([0-9]{2,})/);
-        
-
         try {
          await this.clienteEntity.insert(cliente);
          return "Cliente registrado con exito";
