@@ -16,15 +16,10 @@ export class ClienteService{
 
     async create( cliente : ICliente){
         try {
-            if(cliente.nombre&&cliente.correo&&cliente.domicilio&&cliente.telefono&&cliente.fecha_nacimiento){
-                return await this.clienteEntity.insert(cliente);
-            }else{
-                // throw new BadRequestException({ cause: new Error(), description: "Faltan datos de cliente por ingresar" })
-                throw new Error("Faltan datos de cliente por ingresar");
-            }
+         await this.clienteEntity.insert(cliente);
+         return "Cliente registrado con exito";
         } catch (error) {
-            // throw new BadRequestException({ cause: new Error(), description: "Faltan datos de cliente por ingresar" })
-            throw new Error("Faltan datos de cliente por ingresar " + error);
+            throw new BadRequestException({ cause: "Error al insertar el cliente", description: error })
         }
         
     }
