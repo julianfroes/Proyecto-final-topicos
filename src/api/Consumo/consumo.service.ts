@@ -19,7 +19,7 @@ export class ConsumoService {
 
     }
     //Se crea consumo y se calculan precios por rangos
-    async create(consumo: IConsumo): Promise<boolean> {
+    async create(consumo: IConsumo): Promise<any> {
         //primero se busca el cliente con el id que se manda en el request
         const direccionIDcliente = consumo.id_cliente;
         const cliente = await this.clienteEntity.findOne({
@@ -27,18 +27,16 @@ export class ConsumoService {
         });
         if (!cliente) {
             //aqui entra cuando no encuentra falta algun tipo de mensaje
-            throw new BadRequestException({ cause: new Error(), description: "Id de cliente no encontrada o no valida" })
-            throw new Error("Id de cliente no encontrada o no valida");
+            throw new BadRequestException({ cause: "Error con el id del cliente", description: "Id de cliente no encontrada o no valida" });
         }
         else {
-            if (consumo.consumo > 0) {//aqui se verifica que el consumo se valido mayor a 0
-                const fechaNaCliente = cliente.fecha_nacimiento;//aca es de donde se saca la fecha de nacimiento del cliente
+            const fechaNaCliente = cliente.fecha_nacimiento;
                 const date = new Date();
                 const kw = consumo.consumo;
                 let edad = this.calcularEdad(fechaNaCliente);
                 let total = this.calcularTotalPgar(kw, edad);
 
-                const newConsumo = await this.consumoEntity.save({
+                await this.consumoEntity.save({
                     fecha: date,
                     consumo: kw,
                     id_cliente: consumo.id_cliente
@@ -52,14 +50,7 @@ export class ConsumoService {
                 }).catch((error) => {
                     throw new BadRequestException({ cause: new Error(), description: error })
                 })
-                return true;
-            }
-            else {
-                //aqui seria mandar un mensaje de error en el consumo
-                throw new Error("Cantidad de consumo no valida");
-                
-                return false;
-            }
+                return "Consumo generado";
         }
     }
 

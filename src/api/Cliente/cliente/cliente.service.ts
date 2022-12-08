@@ -24,25 +24,10 @@ export class ClienteService{
         
 
         try {
-            if(cliente.nombre&&cliente.correo&&cliente.domicilio&&cliente.telefono&&cliente.fecha_nacimiento){
-                //Valor de true o false dependiendo si cumplen con el formato
-                let nombreCliente = nombreExp.test(cliente.nombre);
-                let correoCliente = correoExp.test(cliente.correo);
-                let domicilio = domicilioExp.test(cliente.domicilio);
-                let telefono = telefonoExp.test(cliente.telefono);
-                let fechaNacimiento = fechaExp.test(String(cliente.fecha_nacimiento));
-
-                //Falta mostar mensajes de error en caso de ser false
-                
-                return await this.clienteEntity.insert(cliente);
-            
-            }else{
-                // throw new BadRequestException({ cause: new Error(), description: "Faltan datos de cliente por ingresar" })
-                throw new Error("Faltan datos de cliente por ingresar");
-            }
+         await this.clienteEntity.insert(cliente);
+         return "Cliente registrado con exito";
         } catch (error) {
-            // throw new BadRequestException({ cause: new Error(), description: "Faltan datos de cliente por ingresar" })
-            throw new Error("Faltan datos de cliente por ingresar " + error);
+            throw new BadRequestException({ cause: "Error al insertar el cliente", description: error })
         }
         
     }

@@ -36,6 +36,7 @@ export class PagoService {
                                 pagado: true
                                 
                             })
+                            return "consumo saldado";
                         }
                         else{//
                             await this.pagoEntity.save({//si no es mayor pero positivo cuenta como un abono
@@ -45,6 +46,7 @@ export class PagoService {
                                 pagado: false
                                 
                             })
+                            return "Abono de "+abono+" a sido registrado";
                         }
                     }else{
                         //pago no valido

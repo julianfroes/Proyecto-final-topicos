@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Get, Post, PreconditionFailedException } from "@nestjs/common";
 import { ClienteService } from "./cliente.service";
+import { valiBirthdate, valiMail, valiCel, valiName } from 'src/Regex func/validations';
 import { ICliente } from 'src/models/Cliente';
 
 
@@ -11,28 +12,41 @@ export class ClienteController{
 
     @Post()
     Create(@Body() params : ICliente){
-        try {
-            if ((params.correo||params.domicilio||params.fecha_nacimiento||params.nombre||params.telefono) !== null) {
-                if (typeof(params.nombre) != 'string') {
-                    return 'Nombre no valido';
-                }
-                if (typeof(params.correo) != 'string') {
-                    return 'Correo no valido';
-                }
-                if (typeof(params.domicilio) != 'string') {
-                    return 'Domicilio no valido';
-                }
-                if (typeof(params.fecha_nacimiento) != 'string') {
-                    return 'Fecha no valida';
-                }
-                if (typeof(params.telefono) != 'string') {
-                    return 'Telefono no valido';
-                }
-                this.clienteService.create(params);
-            }            
-        } catch (error) {
-            console.log(`Error: ${error}`);
-        }
+        //Validacion????
+        var mensaje = "";
+        var parametromalIngresado = false;
+        if ((params.correo||params.domicilio||params.fecha_nacimiento||params.nombre||params.telefono) !== null) {
+            if (!valiName(params.nombre)) {
+                mensaje+= 'Nombre no valido \n';
+                parametromalIngresado = true;
+            }
+            if (!valiMail(params.correo)) {
+                mensaje+= 'Correo no valido \n';
+                parametromalIngresado = true;
+            }
+            if (typeof(params.domicilio) != 'string') {
+                mensaje+= 'Domicilio no valido \n';
+                parametromalIngresado = true;
+            }
+            if (!valiBirthdate(params.fecha_nacimiento)) {
+                mensaje+= 'Fecha no valida \n';
+                parametromalIngresado = true;
+            }
+            if (!valiCel(params.telefono)) {
+                mensaje+= 'Telefono no valido \n';
+                parametromalIngresado = true;
+            }
+            if(parametromalIngresado){throw new BadRequestException({ cause: "Campos de cliente mal ingresado/s", description: mensaje});}
+            else{
+                try {
+                    return this.clienteService.create(params);
+                } catch (error) {
+                    return new BadRequestException({ cause: new Error(), description: error })
+                } 
+                
+            }
+        }           
+        
     }
 
     //este funciona
@@ -69,4 +83,8 @@ export class ClienteController{
     }
 
 
+}
+
+function onlyLetters(name: any) {
+    throw new Error("Function not implemented.");
 }

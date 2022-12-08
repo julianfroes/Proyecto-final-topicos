@@ -1,6 +1,7 @@
 import { IConsumo } from './../../models/Consumo';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Post } from '@nestjs/common';
 import { ConsumoService } from './consumo.service';
+import { valiOnlyNum, valiOnlyNumDec } from 'src/Regex func/validations';
 
 @Controller('consumo')
 export class ConsumoController {
@@ -10,21 +11,31 @@ export class ConsumoController {
 
     @Post()
     Create(@Body() params : IConsumo){
-        try {
-
-            if (typeof(params.consumo) != 'number') {
-                return 'Consumo no valido';
-            }
-            if (typeof(params.id_cliente) != 'number') {
-                return 'id no valido';
-            }
-
-
-            this.consumoService.create(params);
-        } catch (error) {
-            console.log(`Error: ${error}`);
-            
+        var mensaje = "";
+        var parametromalIngresado = false;
+        if(!valiOnlyNumDec(params.consumo)){
+            mensaje+= 'Consumo debe ser solo numerico \n';
+            parametromalIngresado = true;
+        }if(params.consumo <= 0){
+            mensaje+= 'Consumo debe ser mayor a 0 \n';
+            parametromalIngresado = true;
         }
+        if(!valiOnlyNum(params.id_cliente) || params.id_cliente<=0){
+            mensaje+= 'id no valida \n';
+            parametromalIngresado = true;
+        }
+        if(parametromalIngresado){
+            throw new BadRequestException({ cause: "Consumo mal ingresado", description: mensaje })
+        }
+        else{
+            try {
+                return this.consumoService.create(params);
+            } catch (error) {
+                throw new BadRequestException({ cause: "Consumo mal ingresado", description: error })
+                
+            }
+        }
+        
     }
 
     @Get()
@@ -32,13 +43,17 @@ export class ConsumoController {
         try {
             return this.consumoService.getAll();
         } catch (error) {
-            console.log(`Error: ${error}`);
+            throw new BadRequestException({ cause: "ERROR", description: error })
         }
     }
 
     @Get('/reportesconsumoGet')
     getConsumos(){
-        return this.consumoService.reporteTodoslosConsumos();
+        try {
+            return this.consumoService.reporteTodoslosConsumos();
+        } catch (error) {
+            throw new BadRequestException({ cause: "ERROR en reporte", description: error })
+        }
     }
 
     

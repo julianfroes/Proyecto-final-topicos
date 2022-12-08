@@ -13,9 +13,8 @@ import {ConfigModule} from '@nestjs/config';
 
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    envFilePath : process.env.NODE_ENV === 'docker' ? '.env' : '.env.local'
-  }),Connection, ClienteModule, ConsumoModule, PagoModule],
+  imports: [ConfigModule.forRoot({ envFilePath: process.env.NODE_ENV === 'docker' ? '.env' : '.local.env' }),
+  Connection, ClienteModule, ConsumoModule, PagoModule],
   controllers: [AppController],
   providers: [AppService,ClienteService,ConsumoService,PagoService],
 })
