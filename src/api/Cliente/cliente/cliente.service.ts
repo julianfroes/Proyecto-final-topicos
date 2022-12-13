@@ -99,6 +99,22 @@ export class ClienteService{
         })
         return clientesEncontrados;
     }
+    async getById(id : number){
+        let clienteEncontrado = await this.clienteEntity.find({
+            relations:{
+                consumo:true
+            },
+            where:{
+             id: id
+         }
+ 
+        })
+        if (clienteEncontrado) {
+         return clienteEncontrado;
+        }else{
+            throw new BadRequestException({ cause: "Error al buscar el cliente", description: "No existe un usuario con es id" });
+        }
+     }
 
 }
 

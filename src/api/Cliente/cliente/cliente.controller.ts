@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Post, PreconditionFailedException } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Get, Param, Post, PreconditionFailedException } from "@nestjs/common";
 import { ClienteService } from "./cliente.service";
 import { valiBirthdate, valiMail, valiCel, valiName } from 'src/Regex func/validations';
 import { ICliente } from 'src/models/Cliente';
@@ -81,10 +81,14 @@ export class ClienteController{
             
         }
     }
+    @Get('/:id')
+    getClienteId(@Param('id') param): any{
+        return this.clienteService.getById(param);
+
+    }
+    
 
 
 }
 
-function onlyLetters(name: any) {
-    throw new Error("Function not implemented.");
-}
+
